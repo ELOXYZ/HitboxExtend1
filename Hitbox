@@ -4,12 +4,13 @@ local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 
-local player = Players.LocalPlayer
-local playerGui = player:WaitForChild("PlayerGui")
+local localPlayer = Players.LocalPlayer
+local playerGui = localPlayer:WaitForChild("PlayerGui")
 
 local correctKey = "2985"
 local accessGranted = false
 
+-- Key System UI
 local keyGui = Instance.new("ScreenGui")
 keyGui.Name = "KeySystemUI"
 keyGui.ResetOnSpawn = false
@@ -38,86 +39,85 @@ title.TextColor3 = Color3.new(1, 1, 1)
 title.TextScaled = true
 title.Parent = keyFrame
 
-local inputBox = Instance.new("TextBox")
-inputBox.Size = UDim2.new(0.8, 0, 0, 30)
-inputBox.Position = UDim2.new(0.1, 0, 0.45, 0)
-inputBox.PlaceholderText = "Type key here"
-inputBox.Text = ""
-inputBox.Font = Enum.Font.SourceSans
-inputBox.TextColor3 = Color3.new(1, 1, 1)
-inputBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-inputBox.TextScaled = true
-inputBox.ClearTextOnFocus = false
-inputBox.TextStrokeTransparency = 0
-inputBox.TextStrokeColor3 = Color3.new(0, 0, 0)
-inputBox.Parent = keyFrame
+local keyBox = Instance.new("TextBox")
+keyBox.Size = UDim2.new(0.8, 0, 0, 30)
+keyBox.Position = UDim2.new(0.1, 0, 0.45, 0)
+keyBox.PlaceholderText = "Type key here"
+keyBox.Text = ""
+keyBox.Font = Enum.Font.SourceSans
+keyBox.TextColor3 = Color3.new(1, 1, 1)
+keyBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+keyBox.TextScaled = true
+keyBox.ClearTextOnFocus = false
+keyBox.TextStrokeTransparency = 0
+keyBox.TextStrokeColor3 = Color3.new(0, 0, 0)
+keyBox.Parent = keyFrame
 
-local button = Instance.new("TextButton")
-button.Size = UDim2.new(0.5, 0, 0, 28)
-button.Position = UDim2.new(0.25, 0, 0.75, 0)
-button.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-button.Font = Enum.Font.SourceSansBold
-button.TextColor3 = Color3.new(1, 1, 1)
-button.TextScaled = true
-button.Text = "Submit"
-button.Parent = keyFrame
+local submitButton = Instance.new("TextButton")
+submitButton.Size = UDim2.new(0.5, 0, 0, 28)
+submitButton.Position = UDim2.new(0.25, 0, 0.75, 0)
+submitButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+submitButton.Font = Enum.Font.SourceSansBold
+submitButton.TextColor3 = Color3.new(1, 1, 1)
+submitButton.TextScaled = true
+submitButton.Text = "Submit"
+submitButton.Parent = keyFrame
 
 local buttonCorner = Instance.new("UICorner")
 buttonCorner.CornerRadius = UDim.new(0, 10)
-buttonCorner.Parent = button
+buttonCorner.Parent = submitButton
 
-button.MouseButton1Click:Connect(function()
-	if inputBox.Text == correctKey then
+submitButton.MouseButton1Click:Connect(function()
+	if keyBox.Text == correctKey then
 		accessGranted = true
 		keyGui:Destroy()
 	else
 		StarterGui:SetCore("SendNotification", {
 			Title = "Key System",
 			Text = "Incorrect key!",
-			Duration = 3
+			Duration = 3,
 		})
 	end
 end)
 
 repeat task.wait() until accessGranted
 
+StarterGui:SetCore("SendNotification", {
+	Title = "Hitbox Changer",
+	Text = "Loaded",
+	Duration = 3,
+})
+
 _G.HeadSize = 9
 _G.HitboxEnabled = false
 _G.originalParts = {}
 
-StarterGui:SetCore("SendNotification", {
-	Title = "Hitbox Changer",
-	Text = "Loaded",
-	Duration = 3
-})
+local ui = Instance.new("ScreenGui")
+ui.Name = "HitboxUI"
+ui.ResetOnSpawn = false
+ui.Parent = playerGui
 
-local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "HeadSizeScriptUI"
-screenGui.ResetOnSpawn = false
-screenGui.Parent = playerGui
-
-local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 220, 0, 180)
-frame.Position = UDim2.new(0.5, -110, 0.1, 0)
-frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-frame.BorderSizePixel = 0
-frame.Active = true
-frame.Draggable = true
-frame.Parent = screenGui
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 220, 0, 180)
+mainFrame.Position = UDim2.new(0.5, -110, 0.1, 0)
+mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+mainFrame.BorderSizePixel = 0
+mainFrame.Active = true
+mainFrame.Draggable = true
+mainFrame.Parent = ui
 
 local frameCorner2 = Instance.new("UICorner")
 frameCorner2.CornerRadius = UDim.new(0, 12)
-frameCorner2.Parent = frame
+frameCorner2.Parent = mainFrame
 
-local label = Instance.new("TextLabel")
-label.Size = UDim2.new(1, 0, 0.25, 0)
-label.Position = UDim2.new(0, 0, 0, 0)
-label.BackgroundTransparency = 1
-label.Text = "Hitbox Changer"
-label.TextColor3 = Color3.new(1, 1, 1)
-label.TextScaled = true
-label.Font = Enum.Font.SourceSansBold
-label.Parent = frame
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Size = UDim2.new(1, 0, 0.25, 0)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Text = "Hitbox Changer"
+titleLabel.TextColor3 = Color3.new(1, 1, 1)
+titleLabel.TextScaled = true
+titleLabel.Font = Enum.Font.SourceSansBold
+titleLabel.Parent = mainFrame
 
 local toggleButton = Instance.new("TextButton")
 toggleButton.Size = UDim2.new(0.9, 0, 0.18, 0)
@@ -127,71 +127,51 @@ toggleButton.TextColor3 = Color3.new(1, 1, 1)
 toggleButton.Font = Enum.Font.SourceSansBold
 toggleButton.TextScaled = true
 toggleButton.Text = "Enable Hitbox"
-toggleButton.Parent = frame
+toggleButton.Parent = mainFrame
 
-local toggleCorner = Instance.new("UICorner")
-toggleCorner.CornerRadius = UDim.new(0, 10)
-toggleCorner.Parent = toggleButton
+local buttonCorner2 = Instance.new("UICorner")
+buttonCorner2.CornerRadius = UDim.new(0, 10)
+buttonCorner2.Parent = toggleButton
 
-local sizeInput = Instance.new("TextBox")
-sizeInput.Size = UDim2.new(0.6, 0, 0, 28)
-sizeInput.Position = UDim2.new(0.2, 0, 0.58, 0)
-sizeInput.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-sizeInput.TextColor3 = Color3.fromRGB(255, 255, 255)
-sizeInput.TextScaled = true
-sizeInput.Font = Enum.Font.SourceSans
-sizeInput.ClearTextOnFocus = false
-sizeInput.Text = tostring(_G.HeadSize)
-sizeInput.Parent = frame
-sizeInput.TextStrokeTransparency = 0
-sizeInput.TextStrokeColor3 = Color3.new(0, 0, 0)
+local sizeBox = Instance.new("TextBox")
+sizeBox.Size = UDim2.new(0.6, 0, 0, 28)
+sizeBox.Position = UDim2.new(0.2, 0, 0.58, 0)
+sizeBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+sizeBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+sizeBox.TextScaled = true
+sizeBox.Font = Enum.Font.SourceSans
+sizeBox.ClearTextOnFocus = false
+sizeBox.Text = tostring(_G.HeadSize)
+sizeBox.Parent = mainFrame
+sizeBox.TextStrokeTransparency = 0
+sizeBox.TextStrokeColor3 = Color3.new(0, 0, 0)
 
-sizeInput.FocusLost:Connect(function()
-	local val = tonumber(sizeInput.Text)
+sizeBox.FocusLost:Connect(function(enterPressed)
+	local val = tonumber(sizeBox.Text)
 	if val and val >= 1 and val <= 50 then
 		_G.HeadSize = math.floor(val + 0.5)
 	end
-	sizeInput.Text = tostring(_G.HeadSize)
+	sizeBox.Text = tostring(_G.HeadSize)
 end)
 
 local uiVisible = true
 local tweenInfo = TweenInfo.new(0.4, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
 
-UserInputService.InputBegan:Connect(function(input, isProcessed)
-	if not isProcessed and input.KeyCode == Enum.KeyCode.K then
+UserInputService.InputBegan:Connect(function(input, gpe)
+	if not gpe and input.KeyCode == Enum.KeyCode.K then
 		uiVisible = not uiVisible
 		local goal = {Position = uiVisible and UDim2.new(0.5, -110, 0.1, 0) or UDim2.new(0.5, -110, -0.3, 0)}
-		TweenService:Create(frame, tweenInfo, goal):Play()
+		TweenService:Create(mainFrame, tweenInfo, goal):Play()
 	end
 end)
 
 toggleButton.MouseButton1Click:Connect(function()
 	_G.HitboxEnabled = not _G.HitboxEnabled
 	toggleButton.Text = _G.HitboxEnabled and "Disable Hitbox" or "Enable Hitbox"
-
-	if not _G.HitboxEnabled then
-		for _, otherPlayer in ipairs(Players:GetPlayers()) do
-			if _G.originalParts[otherPlayer.Name] then
-				local char = otherPlayer.Character
-				local root = char and char:FindFirstChild("HumanoidRootPart")
-				if root then
-					local data = _G.originalParts[otherPlayer.Name]
-					root.Size = data.Size
-					root.Transparency = data.Transparency
-					root.BrickColor = data.BrickColor
-					root.Material = data.Material
-					root.CanCollide = data.CanCollide
-					root.CanTouch = data.CanTouch
-					root.CanQuery = data.CanQuery
-				end
-				_G.originalParts[otherPlayer.Name] = nil
-			end
-		end
-	end
 end)
 
 local function CanDamage(otherPlayer)
-	local myTeam = player.Team and player.Team.Name
+	local myTeam = localPlayer.Team and localPlayer.Team.Name
 	local otherTeam = otherPlayer.Team and otherPlayer.Team.Name
 	if not myTeam or not otherTeam then return false end
 	if myTeam == "Prisoners" then
@@ -204,7 +184,23 @@ local function CanDamage(otherPlayer)
 	return false
 end
 
-local function ApplyHitbox(root)
+local function ApplyHitbox(player)
+	local char = player.Character
+	if not char then return end
+	local root = char:FindFirstChild("HumanoidRootPart")
+	local humanoid = char:FindFirstChildOfClass("Humanoid")
+	if not root or not humanoid or humanoid.Sit then return end
+	if not _G.originalParts[player.Name] then
+		_G.originalParts[player.Name] = {
+			Size = root.Size,
+			Transparency = root.Transparency,
+			BrickColor = root.BrickColor,
+			Material = root.Material,
+			CanCollide = root.CanCollide,
+			CanTouch = root.CanTouch,
+			CanQuery = root.CanQuery
+		}
+	end
 	root.Size = Vector3.new(_G.HeadSize, _G.HeadSize, _G.HeadSize)
 	root.Transparency = 0.3
 	root.BrickColor = BrickColor.new("Really red")
@@ -214,47 +210,34 @@ local function ApplyHitbox(root)
 	root.CanQuery = false
 end
 
-local function ResetHitbox(root, data)
-	root.Size = data.Size
-	root.Transparency = data.Transparency
-	root.BrickColor = data.BrickColor
-	root.Material = data.Material
-	root.CanCollide = data.CanCollide
-	root.CanTouch = data.CanTouch
-	root.CanQuery = data.CanQuery
+local function ResetHitbox(player)
+	local char = player.Character
+	local root = char and char:FindFirstChild("HumanoidRootPart")
+	local data = _G.originalParts[player.Name]
+	if root and data then
+		root.Size = data.Size
+		root.Transparency = data.Transparency
+		root.BrickColor = data.BrickColor
+		root.Material = data.Material
+		root.CanCollide = data.CanCollide
+		root.CanTouch = data.CanTouch
+		root.CanQuery = data.CanQuery
+	end
+	_G.originalParts[player.Name] = nil
 end
 
 RunService.Heartbeat:Connect(function()
-	for _, otherPlayer in ipairs(Players:GetPlayers()) do
-		if otherPlayer ~= player then
-			local char = otherPlayer.Character
-			local root = char and char:FindFirstChild("HumanoidRootPart")
-			local humanoid = char and char:FindFirstChildOfClass("Humanoid")
-			if root and humanoid then
-				local canDamage = _G.HitboxEnabled and CanDamage(otherPlayer)
-				local isSitting = humanoid.Sit
-				if canDamage and not isSitting then
-					if not _G.originalParts[otherPlayer.Name] then
-						_G.originalParts[otherPlayer.Name] = {
-							Size = root.Size,
-							Transparency = root.Transparency,
-							BrickColor = root.BrickColor,
-							Material = root.Material,
-							CanCollide = root.CanCollide,
-							CanTouch = root.CanTouch,
-							CanQuery = root.CanQuery
-						}
-					end
-					ApplyHitbox(root)
-				elseif _G.originalParts[otherPlayer.Name] then
-					ResetHitbox(root, _G.originalParts[otherPlayer.Name])
-					_G.originalParts[otherPlayer.Name] = nil
-				end
+	for _, plr in ipairs(Players:GetPlayers()) do
+		if plr ~= localPlayer then
+			if _G.HitboxEnabled and CanDamage(plr) then
+				ApplyHitbox(plr)
+			elseif _G.originalParts[plr.Name] then
+				ResetHitbox(plr)
 			end
 		end
 	end
 end)
 
-Players.PlayerRemoving:Connect(function(leavingPlayer)
-	_G.originalParts[leavingPlayer.Name] = nil
+Players.PlayerRemoving:Connect(function(plr)
+	_G.originalParts[plr.Name] = nil
 end)
