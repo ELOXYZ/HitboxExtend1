@@ -17,8 +17,8 @@ gui.Name = "HitboxGUI"
 gui.ResetOnSpawn = false
 
 local frame = Instance.new("Frame", gui)
-frame.Size = UDim2.new(0, 300, 0, 220)
-frame.Position = UDim2.new(0.5, -150, 0.4, -110)
+frame.Size = UDim2.new(0, 320, 0, 230)
+frame.Position = UDim2.new(0, 20, 0.5, -115)
 frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 frame.BorderSizePixel = 0
 frame.Active = true
@@ -36,7 +36,7 @@ title.TextScaled = true
 
 local keyBox = Instance.new("TextBox", frame)
 keyBox.Size = UDim2.new(0.9, 0, 0, 30)
-keyBox.Position = UDim2.new(0.05, 0, 0, 45)
+keyBox.Position = UDim2.new(0.05, 0, 0, 60)
 keyBox.PlaceholderText = "Enter Key"
 keyBox.Text = ""
 keyBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
@@ -47,7 +47,7 @@ Instance.new("UICorner", keyBox).CornerRadius = UDim.new(0, 8)
 
 local submitButton = Instance.new("TextButton", frame)
 submitButton.Size = UDim2.new(0.9, 0, 0, 30)
-submitButton.Position = UDim2.new(0.05, 0, 0, 85)
+submitButton.Position = UDim2.new(0.05, 0, 0, 100)
 submitButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 submitButton.TextColor3 = Color3.new(1, 1, 1)
 submitButton.Font = Enum.Font.GothamBold
@@ -57,7 +57,7 @@ Instance.new("UICorner", submitButton).CornerRadius = UDim.new(0, 8)
 
 local toggleButton = Instance.new("TextButton", frame)
 toggleButton.Size = UDim2.new(0.9, 0, 0, 30)
-toggleButton.Position = UDim2.new(0.05, 0, 0, 45)
+toggleButton.Position = UDim2.new(0.05, 0, 0, 140)
 toggleButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 toggleButton.TextColor3 = Color3.new(1, 1, 1)
 toggleButton.Font = Enum.Font.GothamBold
@@ -68,7 +68,7 @@ Instance.new("UICorner", toggleButton).CornerRadius = UDim.new(0, 8)
 
 local sizeBox = Instance.new("TextBox", frame)
 sizeBox.Size = UDim2.new(0.9, 0, 0, 30)
-sizeBox.Position = UDim2.new(0.05, 0, 0, 85)
+sizeBox.Position = UDim2.new(0.05, 0, 0, 180)
 sizeBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 sizeBox.TextColor3 = Color3.new(1, 1, 1)
 sizeBox.Text = tostring(_G.HitboxSize)
