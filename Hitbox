@@ -17,8 +17,8 @@ gui.Name = "HitboxGUI"
 gui.ResetOnSpawn = false
 
 local frame = Instance.new("Frame", gui)
-frame.Size = UDim2.new(0, 300, 0, 220)
-frame.Position = UDim2.new(0.5, -150, 0.1, 0)
+frame.Size = UDim2.new(0, 320, 0, 240)
+frame.Position = UDim2.new(0.5, -160, 0.3, 0)
 frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 frame.BorderSizePixel = 0
 frame.Active = true
@@ -26,7 +26,7 @@ frame.Draggable = true
 Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 12)
 
 local title = Instance.new("TextLabel", frame)
-title.Size = UDim2.new(1, 0, 0, 40)
+title.Size = UDim2.new(1, 0, 0, 45)
 title.Position = UDim2.new(0, 0, 0, 0)
 title.BackgroundTransparency = 1
 title.Text = "Hitbox Changer"
@@ -35,8 +35,8 @@ title.TextColor3 = Color3.new(1, 1, 1)
 title.TextScaled = true
 
 local keyBox = Instance.new("TextBox", frame)
-keyBox.Size = UDim2.new(0.9, 0, 0, 35)
-keyBox.Position = UDim2.new(0.05, 0, 0, 55)
+keyBox.Size = UDim2.new(0.85, 0, 0, 35)
+keyBox.Position = UDim2.new(0.075, 0, 0, 55)
 keyBox.PlaceholderText = "Enter Key"
 keyBox.Text = ""
 keyBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
@@ -46,8 +46,8 @@ keyBox.Font = Enum.Font.Gotham
 Instance.new("UICorner", keyBox).CornerRadius = UDim.new(0, 8)
 
 local submitButton = Instance.new("TextButton", frame)
-submitButton.Size = UDim2.new(0.9, 0, 0, 35)
-submitButton.Position = UDim2.new(0.05, 0, 0, 100)
+submitButton.Size = UDim2.new(0.85, 0, 0, 35)
+submitButton.Position = UDim2.new(0.075, 0, 0, 100)
 submitButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 submitButton.TextColor3 = Color3.new(1, 1, 1)
 submitButton.Font = Enum.Font.GothamBold
@@ -56,8 +56,8 @@ submitButton.TextScaled = true
 Instance.new("UICorner", submitButton).CornerRadius = UDim.new(0, 8)
 
 local toggleButton = Instance.new("TextButton", frame)
-toggleButton.Size = UDim2.new(0.9, 0, 0, 35)
-toggleButton.Position = UDim2.new(0.05, 0, 0, 55)
+toggleButton.Size = UDim2.new(0.85, 0, 0, 35)
+toggleButton.Position = UDim2.new(0.075, 0, 0, 55)
 toggleButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 toggleButton.TextColor3 = Color3.new(1, 1, 1)
 toggleButton.Font = Enum.Font.GothamBold
