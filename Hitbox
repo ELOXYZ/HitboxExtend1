@@ -174,6 +174,24 @@ local function ApplyHitbox(root)
     end)
 end
 
+local function areEnemies(plr1, plr2)
+    local t1 = plr1.Team
+    local t2 = plr2.Team
+    if not t1 or not t2 then return false end
+
+    local a, b = t1.Name, t2.Name
+
+    local allied = {
+        ["Prisoners"] = {["Prisoners"] = true, ["Criminals"] = true, ["Villains"] = true},
+        ["Criminals"] = {["Prisoners"] = true, ["Criminals"] = true, ["Villains"] = true},
+        ["Villains"] = {["Prisoners"] = true, ["Criminals"] = true, ["Villains"] = true},
+        ["Police"] = {["Police"] = true, ["Heroes"] = true},
+        ["Heroes"] = {["Police"] = true, ["Heroes"] = true},
+    }
+
+    return not (allied[a] and allied[a][b])
+end
+
 local processed = {}
 local lastUpdate = 0
 
@@ -193,8 +211,9 @@ RunService.Stepped:Connect(function(_, deltaTime)
 
             if humanoid and root then
                 local isSitting = humanoid.Sit
+                local isEnemy = areEnemies(player, otherPlayer)
 
-                if _G.HitboxEnabled and not isSitting then
+                if _G.HitboxEnabled and not isSitting and isEnemy then
                     if not _G.originalParts[otherPlayer.Name] then
                         _G.originalParts[otherPlayer.Name] = {
                             Size = root.Size
