@@ -1,7 +1,7 @@
 _G.HeadSize = 6
 _G.HitboxEnabled = false
 
-local KEY_REQUIRED = "madcity2024"
+local KEY_REQUIRED = "2985"
 local TweenService = game:GetService("TweenService")
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
