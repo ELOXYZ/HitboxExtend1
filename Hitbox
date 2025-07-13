@@ -78,7 +78,8 @@ buttonCorner1.CornerRadius = UDim.new(0, 10)
 buttonCorner1.Parent = unlockButton
 
 local function unlock()
-    if keyBox.Text == KEY_REQUIRED then
+    local enteredKey = keyBox.Text:match("^%s*(.-)%s*$")
+    if enteredKey == KEY_REQUIRED then
         keyBox:Destroy()
         unlockButton:Destroy()
         createHitboxGui()
