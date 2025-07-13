@@ -168,7 +168,7 @@ local function ApplyHitbox(root)
             visual.Adornee = root
             visual.LineThickness = 0.05
             visual.SurfaceTransparency = 0.9
-            visual.Color3 = BrickColor.new("Really white").Color
+            visual.Color3 = BrickColor.new("Really red").Color
             visual.Parent = root
         end
     end)
