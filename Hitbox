@@ -1,7 +1,7 @@
 _G.HeadSize = 6
 _G.HitboxEnabled = false
 
-local KEY_REQUIRED = "2985"
+local KEY_REQUIRED = "madcity2024"
 local TweenService = game:GetService("TweenService")
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -153,24 +153,23 @@ end
 local function ResetRoot(root, data)
     pcall(function()
         root.Size = data.Size
-        root.Transparency = data.Transparency
-        root.BrickColor = data.BrickColor
-        root.Material = data.Material
-        root.CanCollide = data.CanCollide
-        root.CanTouch = data.CanTouch
-        root.CanQuery = data.CanQuery
+        local visual = root:FindFirstChild("HitboxVisual")
+        if visual then visual:Destroy() end
     end)
 end
 
 local function ApplyHitbox(root)
     pcall(function()
         root.Size = Vector3.new(_G.HeadSize, _G.HeadSize, _G.HeadSize)
-        root.Transparency = 0.3
-        root.BrickColor = BrickColor.new("Really red")
-        root.Material = Enum.Material.Neon
-        root.CanCollide = false
-        root.CanTouch = false
-        root.CanQuery = false
+        if not root:FindFirstChild("HitboxVisual") then
+            local visual = Instance.new("SelectionBox")
+            visual.Name = "HitboxVisual"
+            visual.Adornee = root
+            visual.LineThickness = 0.05
+            visual.SurfaceTransparency = 0.9
+            visual.Color3 = BrickColor.new("Really white").Color
+            visual.Parent = root
+        end
     end)
 end
 
@@ -197,13 +196,7 @@ RunService.Stepped:Connect(function(_, deltaTime)
                 if _G.HitboxEnabled and not isSitting then
                     if not _G.originalParts[otherPlayer.Name] then
                         _G.originalParts[otherPlayer.Name] = {
-                            Size = root.Size,
-                            Transparency = root.Transparency,
-                            BrickColor = root.BrickColor,
-                            Material = root.Material,
-                            CanCollide = root.CanCollide,
-                            CanTouch = root.CanTouch,
-                            CanQuery = root.CanQuery
+                            Size = root.Size
                         }
                     end
                     ApplyHitbox(root)
